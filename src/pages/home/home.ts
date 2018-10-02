@@ -2,6 +2,7 @@ import { Component, ApplicationRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Run } from '../../interfaces/run';
 import { Place } from '../../interfaces/place';
+import { TabsPage } from '../tabs/tabs';
 
 
 @Component({
