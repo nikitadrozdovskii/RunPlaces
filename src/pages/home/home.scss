@@ -1,6 +1,10 @@
 page-home {
-#map {
-    height: 80vh;
-    display:none;
+    ion-content{
+        background-image: url(../../assets/img/sbg.png);
+        // background-repeat: no-repeat; 
+        background-size: cover;
+        ion-item{
+            background-color:rgba(#fff,0.9) !important;
+        }
     }
 }

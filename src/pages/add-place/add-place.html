@@ -14,10 +14,16 @@
 
 
 <ion-content padding>
-  <ion-label color="primary" stacked>Search place</ion-label>
-  <ion-input placeholder="Interesting place"></ion-input>
-  <ion-label color="primary" stacked>Within (mi)</ion-label>
-  <ion-input placeholder="5"></ion-input>
-  <button ion-button block (click)="search()">Search</button>
+  <ion-card>
+      <ion-card-content>
+          <ion-label color="primary" stacked>Name</ion-label>
+          <ion-input placeholder="Interesting place"></ion-input>
+          <ion-label color="primary" stacked>Within (mi)</ion-label>
+          <ion-input placeholder="5"></ion-input>
+          <button ion-button block (click)="search()">Search</button>
+      </ion-card-content>
+
+  </ion-card>
+
 
 </ion-content>
