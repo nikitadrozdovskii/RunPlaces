@@ -13,7 +13,7 @@
         <img src="../../assets/img/lyceum.jpg">
       </ion-thumbnail>
       <h2>{{run.date}}</h2>
-      <span>Places: </span><span *ngFor="let place of run.places">{{place.name}} | </span>
+      <h5>Places: </h5><h5 *ngFor="let place of run.places">{{place.name}}</h5>
       <p>{{run.distance}} mi | {{run.pace}} sec/mi</p>
     </ion-item>
     

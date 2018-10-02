@@ -8,13 +8,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { NewRunPage } from '../pages/new-run/new-run';
+import { AddPlacePage } from '../pages/add-place/add-place';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     TabsPage,
-    NewRunPage
+    NewRunPage,
+    AddPlacePage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { NewRunPage } from '../pages/new-run/new-run';
     MyApp,
     HomePage,
     TabsPage,
-    NewRunPage
+    NewRunPage,
+    AddPlacePage
   ],
   providers: [
     StatusBar,

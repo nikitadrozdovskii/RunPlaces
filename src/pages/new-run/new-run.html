@@ -21,9 +21,9 @@
         <ion-icon [name]="place.visited ? 'checkbox' : 'square'" item-end></ion-icon>
       </ion-item>
     </ion-list>
-    <button ion-button block icon-start>
+    <button ion-button block icon-start (click)="addPlacePage()">
       <ion-icon name="add"></ion-icon>
       Add more places
     </button>
-    <button ion-button block>Start Run</button>
+    <button ion-button block (click)="startRun()">Start Run</button>
 </ion-content>

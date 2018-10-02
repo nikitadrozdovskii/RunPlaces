@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Place } from '../../interfaces/place';
+import { AddPlacePage } from '../add-place/add-place';
 
 /**
  * Generated class for the NewRunPage page.
@@ -23,6 +24,15 @@ export class NewRunPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewRunPage');
+  }
+
+  addPlacePage(){
+    console.log('123');
+    this.navCtrl.push(AddPlacePage);
+  }
+
+  startRun(){
+    window.alert("This will start run. Note - checkmarks will only become checked by physically going to the place, user cannot click them by design");
   }
 
 }
