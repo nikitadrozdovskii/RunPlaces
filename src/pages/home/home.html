@@ -7,5 +7,16 @@
 </ion-header>
 
 <ion-content padding>
-
+  <ion-list>     
+    <ion-item *ngFor="let run of runs">
+      <ion-thumbnail item-start>
+        <img src="../../assets/img/lyceum.jpg">
+      </ion-thumbnail>
+      <h2>{{run.date}}</h2>
+      <span>Places: </span><span *ngFor="let place of run.places">{{place.name}} | </span>
+      <p>{{run.distance}} mi | {{run.pace}} sec/mi</p>
+    </ion-item>
+    
+  </ion-list>
+  <div id="map"></div>
 </ion-content>
