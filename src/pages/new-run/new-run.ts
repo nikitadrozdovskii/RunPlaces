@@ -16,6 +16,7 @@ import { AddPlacePage } from '../add-place/add-place';
   templateUrl: 'new-run.html',
 })
 export class NewRunPage {
+  runMode = false;
   toRun: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.toRun = [{place:new Place("Oxford square"),visited:true},
@@ -32,7 +33,10 @@ export class NewRunPage {
   }
 
   startRun(){
-    window.alert("This will start run. Note - checkmarks will only become checked by physically going to the place, user cannot click them by design");
+    this.runMode = true;
   }
 
+  endRun(){
+    this.runMode = false;
+  }
 }
