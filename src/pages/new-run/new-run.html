@@ -7,6 +7,11 @@
 <ion-header>
 
   <ion-navbar>
+      <ion-buttons start>
+          <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
     <ion-title>START NEW RUN</ion-title>
   </ion-navbar>
 
@@ -16,7 +21,9 @@
 <ion-content padding>
   <ion-card>
     <ion-card-content>
-        <img src="../../assets/img/map.png">
+        <div id="map_canvas">
+          </div>
+        <!-- <img src="../../assets/img/map.png"> -->
         <ion-list>
           <ion-item *ngFor="let place of toRun">
               {{place.place.name}}

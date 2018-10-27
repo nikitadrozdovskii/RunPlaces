@@ -9,6 +9,8 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { NewRunPage } from '../pages/new-run/new-run';
 import { AddPlacePage } from '../pages/add-place/add-place';
+import { SigninPage } from '../pages/signin/signin';
+import { SignupPage } from '../pages/signup/signup';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { AddPlacePage } from '../pages/add-place/add-place';
     HomePage,
     TabsPage,
     NewRunPage,
-    AddPlacePage
+    AddPlacePage,
+    SigninPage,
+    SignupPage
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,9 @@ import { AddPlacePage } from '../pages/add-place/add-place';
     HomePage,
     TabsPage,
     NewRunPage,
-    AddPlacePage
+    AddPlacePage,
+    SigninPage,
+    SignupPage
   ],
   providers: [
     StatusBar,
