@@ -8,19 +8,24 @@
         <ion-list>
             <button
             ion-item
-            (click)="onLoad(tabsPage)">
+            (click)="onLoad(rootPage)"
+            *ngIf="isAuthenticated">
             Main</button>
             <button
             ion-item
-            (click)="onLoad(signinPage)">Sign in</button>
+            (click)="onLoad(signinPage)"
+            *ngIf="!isAuthenticated">
+            Sign in</button>
             <button
             ion-item
-            (click)="onLoad(signupPage)">Sign up</button>
+            (click)="onLoad(signupPage)"
+            *ngIf="!isAuthenticated">Sign up</button>
             <button
             ion-item
-            (click)="onLogout()">Logout</button>
+            (click)="onLogout()"
+            *ngIf="isAuthenticated">Logout</button>
         </ion-list>
     </ion-content>
 </ion-menu>
 
-<ion-nav [root]="tabsPage" #nav></ion-nav>
+<ion-nav [root]="rootPage" #nav></ion-nav>

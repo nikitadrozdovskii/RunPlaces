@@ -11,6 +11,7 @@ import { NewRunPage } from '../pages/new-run/new-run';
 import { AddPlacePage } from '../pages/add-place/add-place';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
+import { AuthService } from '../services/auth.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SignupPage } from '../pages/signup/signup';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthService
   ]
 })
 export class AppModule {}

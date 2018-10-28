@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { SignupPage } from './signup';
-import { NgForm } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -12,5 +12,5 @@ import { NgForm } from '@angular/forms';
   ],
 })
 export class SignupPageModule {
-  
+
 }

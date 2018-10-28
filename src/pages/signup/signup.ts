@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 /**
  * Generated class for the SignupPage page.
  *
@@ -15,7 +16,7 @@ import { NgForm } from '@angular/forms';
 })
 export class SignupPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -23,7 +24,16 @@ export class SignupPage {
   }
 
   onSignup(form: NgForm){
-    console.log(form.value);
+    this.authService.signup(form.value.email, form.value.password)
+      .then(data => console.log(data))
+      .catch(error => {
+        const alert = this.alertCtrl.create({
+          title: "Sign up error",
+          message: error.message,
+          buttons: ["dismiss"]
+        });
+        alert.present();
+      });
   }
 
 }
