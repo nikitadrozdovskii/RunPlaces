@@ -30,10 +30,25 @@ export class RunService {
         let currentUserId = firebase.auth().currentUser.uid;
         firebase.auth().currentUser.getIdToken()
         .then(token=>{
-            this.http.put('https://runplaces-e4562.firebaseio.com/' + currentUserId + '/saved-runs.json?auth=' + token, this.currentRun).subscribe((response: Response)=>{
+            this.http.post('https://runplaces-e4562.firebaseio.com/' + currentUserId + '/saved-runs.json?auth=' + token, this.currentRun).subscribe((response: Response)=>{
                 console.log(response);
                 console.log('got here');
             });
         });
     }
+
+    getSavedRunsFromDB(){
+        let currentUserId = firebase.auth().currentUser.uid;
+        firebase.auth().currentUser.getIdToken()
+        .then(token=>{
+            this.http.get('https://runplaces-e4562.firebaseio.com/' + currentUserId + '/saved-runs.json?auth=' + token).subscribe((response: Response)=>{
+               let returnedRuns = [];
+                Object.values(response).forEach(value => {
+                   returnedRuns.push(value);
+               });
+                console.log(returnedRuns);
+            });
+        });
+    }
+    
 }
