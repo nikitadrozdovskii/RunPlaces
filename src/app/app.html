@@ -22,6 +22,10 @@
             *ngIf="!isAuthenticated">Sign up</button>
             <button
             ion-item
+            (click)="onLoad(reauthPage)"
+            *ngIf="isAuthenticated">Change password</button>
+            <button
+            ion-item
             (click)="onLogout()"
             *ngIf="isAuthenticated">Logout</button>
         </ion-list>

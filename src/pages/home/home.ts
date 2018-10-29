@@ -26,7 +26,17 @@ export class HomePage {
     firebase.auth().onAuthStateChanged(user=>{
       if (user){
         this.isAuthenticated = true;
-        this.runService.getSavedRunsFromDB();
+        firebase.auth().currentUser.getIdToken()
+        .then(token=>{
+          this.runService.getSavedRunsFromDB(token).subscribe((response: Response)=>{
+            let returnedRuns = [];
+            (<any>Object).values(response).forEach(value => {
+                returnedRuns.push(value);
+            });
+             console.log(returnedRuns);
+             this.runs= returnedRuns;
+         });
+        });
       } else {
         this.isAuthenticated = false;
       }

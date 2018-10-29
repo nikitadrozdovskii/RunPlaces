@@ -37,18 +37,9 @@ export class RunService {
         });
     }
 
-    getSavedRunsFromDB(){
+    getSavedRunsFromDB(token){
         let currentUserId = firebase.auth().currentUser.uid;
-        firebase.auth().currentUser.getIdToken()
-        .then(token=>{
-            this.http.get('https://runplaces-e4562.firebaseio.com/' + currentUserId + '/saved-runs.json?auth=' + token).subscribe((response: Response)=>{
-               let returnedRuns = [];
-                Object.values(response).forEach(value => {
-                   returnedRuns.push(value);
-               });
-                console.log(returnedRuns);
-            });
-        });
+        return this.http.get('https://runplaces-e4562.firebaseio.com/' + currentUserId + '/saved-runs.json?auth=' + token);
     }
     
 }

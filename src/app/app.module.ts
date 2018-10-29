@@ -14,6 +14,8 @@ import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { AuthService } from '../services/auth.service';
 import { RunService } from '../services/run.service';
+import { ChangePasswordPage } from '../pages/change-password/change-password';
+import { ReauthPage } from '../pages/reauth/reauth';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { RunService } from '../services/run.service';
     NewRunPage,
     AddPlacePage,
     SigninPage,
-    SignupPage
+    SignupPage,
+    ChangePasswordPage,
+    ReauthPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,9 @@ import { RunService } from '../services/run.service';
     NewRunPage,
     AddPlacePage,
     SigninPage,
-    SignupPage
+    SignupPage,
+    ChangePasswordPage,
+    ReauthPage
   ],
   providers: [
     StatusBar,

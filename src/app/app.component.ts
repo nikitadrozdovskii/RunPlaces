@@ -10,6 +10,7 @@ import { SignupPage } from '../pages/signup/signup';
 import firebase from 'firebase';
 import { environment } from '../../secret.environment';
 import { AuthService } from '../services/auth.service';
+import { ReauthPage } from '../pages/reauth/reauth';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,6 +19,7 @@ export class MyApp {
   rootPage:any = TabsPage;
   signinPage = SigninPage;
   signupPage = SignupPage;
+  reauthPage = ReauthPage;
   isAuthenticated = false;
   @ViewChild('nav') nav: NavController;
 
