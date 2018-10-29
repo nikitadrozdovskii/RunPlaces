@@ -58,4 +58,8 @@ export class NewRunPage {
     this.runService.removeCurrentPlace(index);
     this.loadPlacesFromService();
   }
+
+  savePlaces(){
+    this.runService.saveCurrentRunToDB();
+  }
 }
