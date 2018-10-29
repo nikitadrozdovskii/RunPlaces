@@ -16,12 +16,23 @@
 <ion-content padding>
   <ion-card>
       <ion-card-content>
-          <ion-label color="primary" stacked>Name</ion-label>
-          <ion-input placeholder="Interesting place"></ion-input>
-          <ion-label color="primary" stacked>Within (mi)</ion-label>
-          <ion-input placeholder="5"></ion-input>
-          <button ion-button block (click)="search()">Search</button>
-      </ion-card-content>
+        <form #form="ngForm" (ngSubmit)="addPlace(form)">
+            <ion-label color="primary" stacked>Name</ion-label>
+            <ion-input placeholder="Interesting place" name="name" ngModel></ion-input>
+            <ion-label color="primary" stacked>Within (mi)</ion-label>
+            <ion-input placeholder="5"></ion-input>
+            <button ion-button block type="submit">(Add place, later will do search)</button>  
+        </form>
+
+          <!-- ////////////////////////////////////////////////////////////////////////////
+          <form #form="ngForm" (ngSubmit)="onSignin(form)">
+                <ion-label fixed>Email</ion-label>
+                <ion-input type="email" ngModel name="email" required></ion-input>
+                  <ion-label fixed>Password</ion-label>
+                  <ion-input type="password" ngModel name="password" required></ion-input>
+                <button ion-button block type="submit" [disabled]="!form.valid">Sign in</button>
+          </form> -->
+        </ion-card-content>
 
   </ion-card>
 

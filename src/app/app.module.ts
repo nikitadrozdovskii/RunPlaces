@@ -12,6 +12,7 @@ import { AddPlacePage } from '../pages/add-place/add-place';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { AuthService } from '../services/auth.service';
+import { RunService } from '../services/run.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AuthService } from '../services/auth.service';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService
+    AuthService,
+    RunService
   ]
 })
 export class AppModule {}
