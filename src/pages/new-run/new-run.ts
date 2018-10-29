@@ -25,6 +25,10 @@ export class NewRunPage {
   }
 
   ionViewWillEnter(){
+    this.loadPlacesFromService();
+  }
+
+  loadPlacesFromService(){
     let currentPlaces = this.runService.getCurrentPlaces();
     let unvisitedPlaces = [];
     currentPlaces.forEach(place=>{
@@ -48,5 +52,10 @@ export class NewRunPage {
 
   endRun(){
     this.runMode = false;
+  }
+
+  removeCurrentPlace(index){
+    this.runService.removeCurrentPlace(index);
+    this.loadPlacesFromService();
   }
 }

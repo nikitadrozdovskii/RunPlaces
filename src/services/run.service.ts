@@ -16,4 +16,8 @@ export class RunService {
     getCurrentPlaces(){
         return this.currentRun.places.slice();
     }
+
+    removeCurrentPlace(index){
+        this.currentRun.places.splice(index,1);
+    }
 }

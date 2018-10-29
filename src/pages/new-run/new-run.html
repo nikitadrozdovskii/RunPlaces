@@ -25,9 +25,10 @@
           </div>
         <!-- <img src="../../assets/img/map.png"> -->
         <ion-list>
-          <ion-item *ngFor="let place of toRun">
+          <ion-item *ngFor="let place of toRun; let i=index">
               {{place.place.name}}
             <ion-icon [name]="place.visited ? 'checkbox' : 'square'" item-end></ion-icon>
+            <ion-icon name="trash" item-end (click)="removeCurrentPlace(i)"></ion-icon>
           </ion-item>
         </ion-list>
         <button ion-button block icon-start (click)="addPlacePage()" *ngIf="runMode == false" >
@@ -35,6 +36,7 @@
           Add more places
         </button>
         <button ion-button block (click)="startRun()" *ngIf="runMode == false">Start Run</button>
+        <button ion-button block (click)="savePlaces()" *ngIf="runMode == false">Save Places (CLICK ME TO TEST DATABASE!!!)</button>
         <button ion-button block (click)="endRun()" color="danger" *ngIf="runMode == true">End Run</button>
         <ion-grid *ngIf="runMode == true">
             <ion-row align-items-center justify-content-center>
