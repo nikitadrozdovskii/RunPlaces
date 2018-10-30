@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { ForgotPassPage } from '../forgot-pass/forgot-pass';
 
 /**
  * Generated class for the SigninPage page.
@@ -35,6 +36,10 @@ export class SigninPage {
       });
       alert.present();
     });
+  }
+
+  onForgotPassword(){
+    this.navCtrl.push(ForgotPassPage);
   }
 
 }

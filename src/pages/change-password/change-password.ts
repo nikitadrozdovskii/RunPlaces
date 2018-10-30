@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import firebase from 'firebase';
 
@@ -17,7 +17,7 @@ import firebase from 'firebase';
 })
 export class ChangePasswordPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl:AlertController) {
   }
 
   ionViewDidLoad() {
@@ -28,10 +28,18 @@ export class ChangePasswordPage {
     const user = firebase.auth().currentUser;
     const newPassword = form.value.password;
 
-    user.updatePassword(newPassword).then(function() {
-      console.log('Update successful.'); 
-    }).catch(function(error) {
-      console.log('// An error happened.');
+    user.updatePassword(newPassword).then(() => {
+      let alert = this.alertCtrl.create({
+        title: 'Password changed',
+        buttons: ['Dismiss']
+        });
+        alert.present(); 
+    }).catch(() => {
+      let alert = this.alertCtrl.create({
+        title: 'Error changing password',
+        buttons: ['Dismiss']
+        });
+        alert.present();
     });
   }
 

@@ -16,6 +16,7 @@ import { AuthService } from '../services/auth.service';
 import { RunService } from '../services/run.service';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { ReauthPage } from '../pages/reauth/reauth';
+import { ForgotPassPage } from '../pages/forgot-pass/forgot-pass';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ReauthPage } from '../pages/reauth/reauth';
     SigninPage,
     SignupPage,
     ChangePasswordPage,
-    ReauthPage
+    ReauthPage,
+    ForgotPassPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { ReauthPage } from '../pages/reauth/reauth';
     SigninPage,
     SignupPage,
     ChangePasswordPage,
-    ReauthPage
+    ReauthPage,
+    ForgotPassPage
   ],
   providers: [
     StatusBar,
