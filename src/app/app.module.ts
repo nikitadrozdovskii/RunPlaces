@@ -17,6 +17,7 @@ import { RunService } from '../services/run.service';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { ReauthPage } from '../pages/reauth/reauth';
 import { ForgotPassPage } from '../pages/forgot-pass/forgot-pass';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ForgotPassPage } from '../pages/forgot-pass/forgot-pass';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
-    RunService
+    RunService,
+    Geolocation
   ]
 })
 export class AppModule {}
