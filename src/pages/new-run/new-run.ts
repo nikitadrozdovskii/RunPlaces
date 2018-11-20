@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Place } from '../../interfaces/place';
 import { AddPlacePage } from '../add-place/add-place';
 import { RunService } from '../../services/run.service';
 import { Geolocation } from '@ionic-native/geolocation';
+import { } from '@types/googlemaps';
 
 /**
  * Generated class for the NewRunPage page.
@@ -22,6 +23,8 @@ export class NewRunPage {
   toRun: any;
   long:any =0;
   lat:any =0;
+  @ViewChild('gmap') gmapElement: any;
+  map: google.maps.Map;
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
     ,private geolocation: Geolocation) {
     this.toRun = [{place:new Place("Oxford square"),visited:true},
@@ -44,6 +47,12 @@ export class NewRunPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewRunPage');
     this.getLocation();
+    var mapProp = {
+      center: new google.maps.LatLng(18.5793, 73.8143),
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
   }
 
   addPlacePage(){
