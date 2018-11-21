@@ -47,12 +47,6 @@ export class NewRunPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewRunPage');
     this.getLocation();
-    var mapProp = {
-      center: new google.maps.LatLng(18.5793, 73.8143),
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
   }
 
   addPlacePage(){
@@ -84,10 +78,24 @@ export class NewRunPage {
       timeout: 5000,
       maximumAge: 0
     };
-
+    //get current position, initialize google maps and marker
     this.geolocation.getCurrentPosition(options).then((resp) => {
-      this.long = resp.coords.latitude;
-      this.lat = resp.coords.longitude;
+      //truncated to 4 dec places
+      this.lat = Math.floor(resp.coords.latitude * 100000)/100000;
+      this.long = Math.floor(resp.coords.longitude * 100000)/100000;
+      let myLatLng = new google.maps.LatLng(this.lat, this.long);
+      var mapProp = {
+      center: myLatLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: this.map,
+      title: 'Hello World!'
+    });
      }).catch((error) => {
       this.long = error;
      });
