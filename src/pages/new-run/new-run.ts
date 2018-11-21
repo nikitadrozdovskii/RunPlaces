@@ -26,6 +26,8 @@ export class NewRunPage {
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;
   marker: any;
+  pace = 0;
+  previousLoc = {lat:0,long:0};
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
     ,private geolocation: Geolocation) {
     this.toRun = [{place:new Place("Oxford square"),visited:true},
@@ -86,6 +88,9 @@ export class NewRunPage {
       this.lat = Math.floor(resp.coords.latitude * 100000)/100000;
       this.long = Math.floor(resp.coords.longitude * 100000)/100000;
       let myLatLng = new google.maps.LatLng(this.lat, this.long);
+      //set initial coordinates for previous
+      this.previousLoc.lat = this.lat;
+      this.previousLoc.long= this.long;
       var mapProp = {
       center: myLatLng,
       zoom: 15,
@@ -116,11 +121,40 @@ export class NewRunPage {
   var watchID = navigator.geolocation.watchPosition((position) => {
     console.log(position);
     //recenter map + marker
-    let myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    let currLat =position.coords.latitude;
+    let currLong = position.coords.longitude;
+    let myLatlng = new google.maps.LatLng(currLat, currLong);
     this.marker.setPosition(myLatlng);
     this.map.setCenter(myLatlng);
     console.log(myLatlng);
+
+    //calculate distacne between this and last location
+    let distance = this.getDistanceFromLatLonInKm(this.previousLoc.lat,this.previousLoc.long,currLat,currLong);
+    console.log(distance);
+    this.previousLoc.lat = currLat;
+    this.previousLoc.long = currLong;
+    
 }, onError, { timeout: 30000 });
+  }
+
+
+  getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+    console.log(lat1,lon1, lat2,lon2);
+    var R = 6371; // Radius of the earth in km
+    var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = this.deg2rad(lon2-lon1); 
+    var a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ; 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    return d;
+  }
+  
+ deg2rad(deg) {
+    return deg * (Math.PI/180)
   }
 
 }
