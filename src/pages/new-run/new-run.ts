@@ -25,6 +25,7 @@ export class NewRunPage {
   lat:any =0;
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;
+  marker: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
     ,private geolocation: Geolocation) {
     this.toRun = [{place:new Place("Oxford square"),visited:true},
@@ -56,6 +57,7 @@ export class NewRunPage {
 
   startRun(){
     this.runMode = true;
+    this.startTrack();
   }
 
   endRun(){
@@ -91,7 +93,7 @@ export class NewRunPage {
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
 
-    var marker = new google.maps.Marker({
+    this.marker = new google.maps.Marker({
       position: myLatLng,
       map: this.map,
       title: 'Hello World!'
@@ -99,6 +101,26 @@ export class NewRunPage {
      }).catch((error) => {
       this.long = error;
      });
+  }
+
+  startTrack(){
+
+  // onError Callback receives a PositionError object
+  //
+  function onError(error) {
+    console.log("error!!!" + error);
+  }
+
+  // Options: throw an error if no update is received every 30 seconds.
+  //
+  var watchID = navigator.geolocation.watchPosition((position) => {
+    console.log(position);
+    //recenter map + marker
+    let myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    this.marker.setPosition(myLatlng);
+    this.map.setCenter(myLatlng);
+    console.log(myLatlng);
+}, onError, { timeout: 30000 });
   }
 
 }
