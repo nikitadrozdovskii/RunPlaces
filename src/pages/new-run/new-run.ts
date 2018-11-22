@@ -27,7 +27,7 @@ export class NewRunPage {
   map: google.maps.Map;
   marker: any;
   pace = 0;
-  previousLoc = {lat:0,long:0};
+  previousLoc = {lat:0,long:0,time:0};
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
     ,private geolocation: Geolocation) {
     this.toRun = [{place:new Place("Oxford square"),visited:true},
@@ -88,9 +88,10 @@ export class NewRunPage {
       this.lat = Math.floor(resp.coords.latitude * 100000)/100000;
       this.long = Math.floor(resp.coords.longitude * 100000)/100000;
       let myLatLng = new google.maps.LatLng(this.lat, this.long);
-      //set initial coordinates for previous
+      //set initial coordinates and time for previous
       this.previousLoc.lat = this.lat;
       this.previousLoc.long= this.long;
+      this.previousLoc.time = resp.timestamp;
       var mapProp = {
       center: myLatLng,
       zoom: 15,
@@ -128,12 +129,16 @@ export class NewRunPage {
     this.map.setCenter(myLatlng);
     console.log(myLatlng);
 
-    //calculate distacne between this and last location
+    //calculate distacne between this and last location, update previous location
     let distance = this.getDistanceFromLatLonInKm(this.previousLoc.lat,this.previousLoc.long,currLat,currLong);
-    console.log(distance);
     this.previousLoc.lat = currLat;
     this.previousLoc.long = currLong;
-    
+    //calculate time between this and last location, update previous location
+    let timePast = position.timestamp - this.previousLoc.time; //since last measurement
+    this.previousLoc.time = position.timestamp;
+
+    this.pace =Math.round( (1/((distance/1.609)/(timePast/60000)))*100)/100;
+    // this.lat = Math.floor(resp.coords.latitude * 100000)/100000;); //minute/
 }, onError, { timeout: 30000 });
   }
 
