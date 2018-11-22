@@ -42,10 +42,10 @@
         <ion-grid *ngIf="runMode == true">
             <ion-row align-items-center justify-content-center>
                 <ion-col class="big_number" text-center>
-                  {{pace}}
+                  {{pace.toString().slice(0,4)}}
                 </ion-col>
                 <ion-col class="big_number" text-center>
-                  {{lat}}
+                  {{totalDistance.toString().slice(0,4)}}
                 </ion-col>
               </ion-row>
           <ion-row justify-content-center>
@@ -53,7 +53,7 @@
               Pace (min/mi)
             </ion-col>
             <ion-col text-center>
-              Latitude
+              Distance (mi)
             </ion-col>
           </ion-row>
         </ion-grid>

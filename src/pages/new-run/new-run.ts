@@ -28,6 +28,7 @@ export class NewRunPage {
   marker: any;
   pace = 0;
   previousLoc = {lat:0,long:0,time:0};
+  totalDistance = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
     ,private geolocation: Geolocation) {
     this.toRun = [{place:new Place("Oxford square"),visited:true},
@@ -131,14 +132,14 @@ export class NewRunPage {
 
     //calculate distacne between this and last location, update previous location
     let distance = this.getDistanceFromLatLonInKm(this.previousLoc.lat,this.previousLoc.long,currLat,currLong);
+    this.totalDistance += distance*1.609; //add to total distance in miles
     this.previousLoc.lat = currLat;
     this.previousLoc.long = currLong;
     //calculate time between this and last location, update previous location
     let timePast = position.timestamp - this.previousLoc.time; //since last measurement
     this.previousLoc.time = position.timestamp;
 
-    this.pace =Math.round( (1/((distance/1.609)/(timePast/60000)))*100)/100;
-    // this.lat = Math.floor(resp.coords.latitude * 100000)/100000;); //minute/
+    this.pace =(1/((distance/1.609)/(timePast/60000)));
 }, onError, { timeout: 30000 });
   }
 
