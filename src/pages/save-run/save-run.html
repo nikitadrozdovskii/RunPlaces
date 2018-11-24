@@ -1,0 +1,44 @@
+<!--
+  Generated template for the SaveRunPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>SAVE YOUR RUN</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+        <ion-grid>
+            <ion-row align-items-center justify-content-center>
+                <ion-col class="big_number" text-center>
+                  8.45
+                </ion-col>
+                <ion-col class="big_number" text-center>
+                  2
+                </ion-col>
+              </ion-row>
+          <ion-row justify-content-center>
+            <ion-col text-center>
+              Pace (min/mi)
+            </ion-col>
+            <ion-col text-center>
+              Distance (mi)
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+        <button ion-button block (click)="save()" >Save</button>
+        <button ion-button block color="danger" (click)='discard()'>Discard</button>
+
+      </ion-card-content>
+  </ion-card>
+
+</ion-content>

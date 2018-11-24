@@ -18,6 +18,7 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { ReauthPage } from '../pages/reauth/reauth';
 import { ForgotPassPage } from '../pages/forgot-pass/forgot-pass';
 import { Geolocation } from '@ionic-native/geolocation';
+import { SaveRunPage } from '../pages/save-run/save-run';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     SignupPage,
     ChangePasswordPage,
     ReauthPage,
-    ForgotPassPage
+    ForgotPassPage,
+    SaveRunPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     SignupPage,
     ChangePasswordPage,
     ReauthPage,
-    ForgotPassPage
+    ForgotPassPage,
+    SaveRunPage
   ],
   providers: [
     StatusBar,

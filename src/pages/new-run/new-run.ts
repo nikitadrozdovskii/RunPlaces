@@ -1,10 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Place } from '../../interfaces/place';
 import { AddPlacePage } from '../add-place/add-place';
 import { RunService } from '../../services/run.service';
 import { Geolocation } from '@ionic-native/geolocation';
 import { } from '@types/googlemaps';
+import { SaveRunPage } from '../save-run/save-run';
 
 /**
  * Generated class for the NewRunPage page.
@@ -30,7 +31,8 @@ export class NewRunPage {
   previousLoc = {lat:0,long:0,time:0};
   totalDistance = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
-    ,private geolocation: Geolocation) {
+    ,private geolocation: Geolocation
+    ,private modalCtrl: ModalController) {
     this.toRun = [{place:new Place("Oxford square"),visited:true},
     {place:new Place("Faulkner's house"), visited:false}];
   }
@@ -63,8 +65,11 @@ export class NewRunPage {
     this.startTrack();
   }
 
+  //show popup with run data, offer to save it to DB or discard it
   endRun(){
     this.runMode = false;
+    const modal = this.modalCtrl.create(SaveRunPage);
+    modal.present();
   }
 
   removeCurrentPlace(index){
