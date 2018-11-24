@@ -19,10 +19,10 @@
         <ion-grid>
             <ion-row align-items-center justify-content-center>
                 <ion-col class="big_number" text-center>
-                  8.45
+                  {{pace}}
                 </ion-col>
                 <ion-col class="big_number" text-center>
-                  2
+                  {{distance}}
                 </ion-col>
               </ion-row>
           <ion-row justify-content-center>
@@ -35,7 +35,8 @@
           </ion-row>
         </ion-grid>
         
-        <button ion-button block (click)="save()" >Save</button>
+        <button ion-button block (click)="save()">Save RUN (CLICK ME TO TEST DATABASE!!!, saved run will appear on History page)</button>
+
         <button ion-button block color="danger" (click)='discard()'>Discard</button>
 
       </ion-card-content>

@@ -42,6 +42,8 @@ export class HomePage {
       } else {
         this.isAuthenticated = false;
       }
+      console.log(this.runs);
   });
+  
 }
 }

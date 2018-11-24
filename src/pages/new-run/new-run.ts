@@ -68,7 +68,7 @@ export class NewRunPage {
   //show popup with run data, offer to save it to DB or discard it
   endRun(){
     this.runMode = false;
-    const modal = this.modalCtrl.create(SaveRunPage);
+    const modal = this.modalCtrl.create(SaveRunPage, {pace: this.pace, distance:this.totalDistance});
     modal.present();
   }
 
@@ -77,9 +77,6 @@ export class NewRunPage {
     this.loadPlacesFromService();
   }
 
-  savePlaces(){
-    this.runService.saveCurrentRunToDB();
-  }
 
   getLocation(){
 

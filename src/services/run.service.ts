@@ -26,13 +26,15 @@ export class RunService {
         this.currentRun.places.splice(index,1);
     }
 
-    saveCurrentRunToDB(){
+    saveCurrentRunToDB(pace,distance){
+        this.currentRun.pace = pace;
+        this.currentRun.distance = distance;
         let currentUserId = firebase.auth().currentUser.uid;
         firebase.auth().currentUser.getIdToken()
         .then(token=>{
             this.http.post('https://runplaces-e4562.firebaseio.com/' + currentUserId + '/saved-runs.json?auth=' + token, this.currentRun).subscribe((response: Response)=>{
                 console.log(response);
-                console.log('got here');
+                console.log('pushed' + JSON.stringify(this.currentRun));
             });
         });
     }

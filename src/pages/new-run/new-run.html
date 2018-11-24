@@ -37,7 +37,7 @@
           Add more places
         </button>
         <button ion-button block (click)="startRun()" *ngIf="runMode == false">Start Run</button>
-        <button ion-button block (click)="savePlaces()" *ngIf="runMode == false">Save RUN (CLICK ME TO TEST DATABASE!!!, saved run will appear on History page)</button>
+        <!-- <button ion-button block (click)="savePlaces()" *ngIf="runMode == false">Save RUN (CLICK ME TO TEST DATABASE!!!, saved run will appear on History page)</button> -->
         <button ion-button block (click)="endRun()" color="danger" *ngIf="runMode == true">End Run</button>
         <ion-grid *ngIf="runMode == true">
             <ion-row align-items-center justify-content-center>
