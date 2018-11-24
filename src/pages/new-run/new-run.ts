@@ -29,11 +29,10 @@ export class NewRunPage {
   marker: any;
   pace = 0;
   sumPace = 0.0;
-  avCount = -1;
   avPace = 0;
   previousLoc = {lat:0,long:0,time:0};
   totalDistance = 0;
-  skippedfirst = 1;
+  paces=[];
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
     ,private geolocation: Geolocation
     ,private modalCtrl: ModalController) {
@@ -71,11 +70,21 @@ export class NewRunPage {
 
   //show popup with run data, offer to save it to DB or discard it
   endRun(){
-    this.avPace = this.sumPace/this.avCount;
-    console.log(`${this.sumPace}/${this.avCount} = ${this.avPace}`);
-    this.runMode = false;
+    this.paces.splice(0,2); //remove first two unreliable values
+    let sum = this.paces.reduce(function(a, b) { return a + b; }); //sum up
+    let avg = sum / this.paces.length; //count average
+    this.avPace = avg;
+    //present modal offering to save run
     const modal = this.modalCtrl.create(SaveRunPage, {pace: this.avPace, distance:this.totalDistance});
     modal.present();
+        //reset values
+        this.runMode = false;
+        this.pace = 0;
+        this.sumPace = 0.0;
+        this.avPace = 0;
+        this.previousLoc = {lat:0,long:0,time:0};
+        this.totalDistance = 0;
+        this.paces=[];
   }
 
   removeCurrentPlace(index){
@@ -129,7 +138,6 @@ export class NewRunPage {
   // Options: throw an error if no update is received every 30 seconds.
   //
   var watchID = navigator.geolocation.watchPosition((position) => {
-    if (this.skippedfirst>3){ //skip first 3 location changes
     //recenter map + marker
     let currLat =position.coords.latitude;
     let currLong = position.coords.longitude;
@@ -151,13 +159,12 @@ export class NewRunPage {
     if (this.pace !== Infinity && !isNaN(this.pace)){
       this.avCount++;
       this.sumPace = this.sumPace + this.pace;
+      this.paces.push(this.pace);
+      console.log(this.paces);
       console.log("pace" + this.pace);
       console.log("sum" + this.sumPace);
     }
-  } else {
-    this.skippedfirst++;
-    console.log("skipped");
-  }
+
     
 
 }, onError, { timeout: 30000 });
