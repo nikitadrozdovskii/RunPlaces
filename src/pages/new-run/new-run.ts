@@ -28,8 +28,12 @@ export class NewRunPage {
   map: google.maps.Map;
   marker: any;
   pace = 0;
+  sumPace = 0.0;
+  avCount = -1;
+  avPace = 0;
   previousLoc = {lat:0,long:0,time:0};
   totalDistance = 0;
+  skippedfirst = 1;
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
     ,private geolocation: Geolocation
     ,private modalCtrl: ModalController) {
@@ -67,8 +71,10 @@ export class NewRunPage {
 
   //show popup with run data, offer to save it to DB or discard it
   endRun(){
+    this.avPace = this.sumPace/this.avCount;
+    console.log(`${this.sumPace}/${this.avCount} = ${this.avPace}`);
     this.runMode = false;
-    const modal = this.modalCtrl.create(SaveRunPage, {pace: this.pace, distance:this.totalDistance});
+    const modal = this.modalCtrl.create(SaveRunPage, {pace: this.avPace, distance:this.totalDistance});
     modal.present();
   }
 
@@ -123,7 +129,7 @@ export class NewRunPage {
   // Options: throw an error if no update is received every 30 seconds.
   //
   var watchID = navigator.geolocation.watchPosition((position) => {
-    console.log(position);
+    if (this.skippedfirst>3){ //skip first 3 location changes
     //recenter map + marker
     let currLat =position.coords.latitude;
     let currLong = position.coords.longitude;
@@ -141,7 +147,19 @@ export class NewRunPage {
     let timePast = position.timestamp - this.previousLoc.time; //since last measurement
     this.previousLoc.time = position.timestamp;
 
-    this.pace =(1/((distance/1.609)/(timePast/60000)));
+    this.pace =(1/((distance/1.609)/(timePast/60000))); //current pace
+    if (this.pace !== Infinity && !isNaN(this.pace)){
+      this.avCount++;
+      this.sumPace = this.sumPace + this.pace;
+      console.log("pace" + this.pace);
+      console.log("sum" + this.sumPace);
+    }
+  } else {
+    this.skippedfirst++;
+    console.log("skipped");
+  }
+    
+
 }, onError, { timeout: 30000 });
   }
 
