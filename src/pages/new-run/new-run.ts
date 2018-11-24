@@ -33,6 +33,7 @@ export class NewRunPage {
   previousLoc = {lat:0,long:0,time:0};
   totalDistance = 0;
   paces=[];
+  watchID:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
     ,private geolocation: Geolocation
     ,private modalCtrl: ModalController) {
@@ -71,20 +72,25 @@ export class NewRunPage {
   //show popup with run data, offer to save it to DB or discard it
   endRun(){
     this.paces.splice(0,2); //remove first two unreliable values
-    let sum = this.paces.reduce(function(a, b) { return a + b; }); //sum up
-    let avg = sum / this.paces.length; //count average
+    if (this.paces.length!==0){
+      let sum = this.paces.reduce(function(a, b) { return a + b; }); //sum up
+      let avg = sum / this.paces.length; //count average
     this.avPace = avg;
+    }
     //present modal offering to save run
     const modal = this.modalCtrl.create(SaveRunPage, {pace: this.avPace, distance:this.totalDistance});
     modal.present();
+    navigator.geolocation.clearWatch(this.watchID);
         //reset values
         this.runMode = false;
         this.pace = 0;
         this.sumPace = 0.0;
         this.avPace = 0;
-        this.previousLoc = {lat:0,long:0,time:0};
+        // this.previousLoc = {lat:0,long:0,time:0};
         this.totalDistance = 0;
         this.paces=[];
+        this.long =0;
+        this.lat=0;
   }
 
   removeCurrentPlace(index){
@@ -128,6 +134,15 @@ export class NewRunPage {
   }
 
   startTrack(){
+  // //reset values
+  // this.pace = 0;
+  // this.sumPace = 0.0;
+  // this.avPace = 0;
+  // // this.previousLoc = {lat:0,long:0,time:0};
+  // this.totalDistance = 0;
+  // this.paces=[];
+  // this.long =0;
+  // this.lat=0;
 
   // onError Callback receives a PositionError object
   //
@@ -137,7 +152,7 @@ export class NewRunPage {
 
   // Options: throw an error if no update is received every 30 seconds.
   //
-  var watchID = navigator.geolocation.watchPosition((position) => {
+  this.watchID = navigator.geolocation.watchPosition((position) => {
     //recenter map + marker
     let currLat =position.coords.latitude;
     let currLong = position.coords.longitude;
@@ -157,7 +172,6 @@ export class NewRunPage {
 
     this.pace =(1/((distance/1.609)/(timePast/60000))); //current pace
     if (this.pace !== Infinity && !isNaN(this.pace)){
-      this.avCount++;
       this.sumPace = this.sumPace + this.pace;
       this.paces.push(this.pace);
       console.log(this.paces);
