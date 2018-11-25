@@ -31,9 +31,13 @@ export class HomePage {
           this.runService.getSavedRunsFromDB(token).subscribe((response: Response)=>{
             if (response){
               let returnedRuns = [];
+              console.log(response);
               (<any>Object).values(response).forEach(value => {
                   returnedRuns.push(value);
               });
+              (<any>Object).keys(response).forEach((key,i) => {
+                returnedRuns[i].id = key;
+            });
                console.log(returnedRuns);
                this.runs= returnedRuns;
             }
@@ -42,8 +46,12 @@ export class HomePage {
       } else {
         this.isAuthenticated = false;
       }
-      console.log(this.runs);
   });
   
+}
+
+deleteRun(index){
+  // this.runService.deleteRun(this.runs[index].id);
+  window.alert(this.runs[index].id);
 }
 }
