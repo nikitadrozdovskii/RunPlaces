@@ -81,6 +81,7 @@ export class NewRunPage {
     const modal = this.modalCtrl.create(SaveRunPage, {pace: this.avPace, distance:this.totalDistance});
     modal.present();
     navigator.geolocation.clearWatch(this.watchID);
+
         //reset values
         this.runMode = false;
         this.pace = 0;
@@ -134,15 +135,16 @@ export class NewRunPage {
   }
 
   startTrack(){
-  // //reset values
-  // this.pace = 0;
-  // this.sumPace = 0.0;
-  // this.avPace = 0;
-  // // this.previousLoc = {lat:0,long:0,time:0};
-  // this.totalDistance = 0;
-  // this.paces=[];
-  // this.long =0;
-  // this.lat=0;
+  //reset values
+  this.pace = 0;
+  this.sumPace = 0.0;
+  this.avPace = 0;
+  // this.previousLoc = {lat:0,long:0,time:0};
+  this.totalDistance = 0;
+  this.paces=[];
+  this.long =0;
+  this.lat=0;
+  this.getLocation();
 
   // onError Callback receives a PositionError object
   //
