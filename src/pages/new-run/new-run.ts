@@ -35,6 +35,7 @@ export class NewRunPage {
   paces=[];
   watchID:any;
   currentPlaces = [];
+  placeMarkers = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
     ,private geolocation: Geolocation
     ,private modalCtrl: ModalController) {
@@ -44,11 +45,11 @@ export class NewRunPage {
   ionViewWillEnter(){
     this.loadPlacesFromService();
     this.currentPlaces.forEach(place => {
-      let marker = new google.maps.Marker({
+      this.placeMarkers.push(new google.maps.Marker({
         position: new google.maps.LatLng(place.lat, place.long),
         map: this.map,
         title: place.name
-      });
+      }));
     });
   }
 
@@ -102,6 +103,13 @@ export class NewRunPage {
   }
 
   removeCurrentPlace(index){
+    console.log(this.currentPlaces[index].name)
+    this.placeMarkers.forEach(marker=>{
+      if (marker.title === this.currentPlaces[index].name){
+        marker.setMap(null);
+      }
+    })
+    console.log(this.placeMarkers);
     this.runService.removeCurrentPlace(index);
     this.loadPlacesFromService();
   }
