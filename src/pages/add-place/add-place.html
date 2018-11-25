@@ -16,12 +16,12 @@
 <ion-content padding>
   <ion-card>
       <ion-card-content>
-        <form #form="ngForm" (ngSubmit)="addPlace(form)">
+        <form #form="ngForm" (ngSubmit)="findPlace(form)">
             <ion-label color="primary" stacked>Name</ion-label>
             <ion-input placeholder="Interesting place" name="name" ngModel></ion-input>
-            <ion-label color="primary" stacked>Within (mi)</ion-label>
-            <ion-input placeholder="5"></ion-input>
-            <button ion-button block type="submit">(Add place, later will do search)</button>  
+            <!-- <ion-label color="primary" stacked>Within (mi)</ion-label>
+            <ion-input placeholder="5"></ion-input> -->
+            <button ion-button block type="submit">Find Place</button>  
         </form>
 
           <!-- ////////////////////////////////////////////////////////////////////////////
@@ -32,6 +32,17 @@
                   <ion-input type="password" ngModel name="password" required></ion-input>
                 <button ion-button block type="submit" [disabled]="!form.valid">Sign in</button>
           </form> -->
+          <ion-list>     
+            <ion-item *ngFor="let result of results">
+              <ion-thumbnail item-start>
+                <img src={{result.photos[0].getUrl()}}>
+              </ion-thumbnail>
+              <h5>Name: {{result.name}}</h5>
+              <h5>Address: {{result.formatted_address}}</h5>
+            </ion-item>
+            
+          </ion-list>
+          <button ion-button block (click)="addPlaceToRun()">Add place to run</button>  
         </ion-card-content>
 
   </ion-card>
