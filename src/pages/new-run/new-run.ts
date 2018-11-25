@@ -34,6 +34,7 @@ export class NewRunPage {
   totalDistance = 0;
   paces=[];
   watchID:any;
+  currentPlaces = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
     ,private geolocation: Geolocation
     ,private modalCtrl: ModalController) {
@@ -42,12 +43,19 @@ export class NewRunPage {
 
   ionViewWillEnter(){
     this.loadPlacesFromService();
+    this.currentPlaces.forEach(place => {
+      let marker = new google.maps.Marker({
+        position: new google.maps.LatLng(place.lat, place.long),
+        map: this.map,
+        title: place.name
+      });
+    });
   }
 
   loadPlacesFromService(){
-    let currentPlaces = this.runService.getCurrentPlaces();
+    this.currentPlaces = this.runService.getCurrentPlaces();
     let unvisitedPlaces = [];
-    currentPlaces.forEach(place=>{
+    this.currentPlaces.forEach(place=>{
       unvisitedPlaces.push({place:place, visited:false});
     });
     this.toRun = unvisitedPlaces;
@@ -126,7 +134,13 @@ export class NewRunPage {
     this.marker = new google.maps.Marker({
       position: myLatLng,
       map: this.map,
-      title: 'Hello World!'
+      title: 'runner',
+      
+      icon: {
+        size: new google.maps.Size(50, 50),
+        scaledSize: new google.maps.Size(50, 50),
+        url: "../../assets/img/icon.png"
+    }
     });
      }).catch((error) => {
       this.long = error;
