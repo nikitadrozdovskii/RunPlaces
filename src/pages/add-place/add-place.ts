@@ -45,11 +45,10 @@ export class AddPlacePage {
       }
     });
   }
-    // this.runService.addPlaceToCurrentRun(new Place(form.value.name));
-    // this.navCtrl.pop();
 
     addPlaceToRun(){
-    this.runService.addPlaceToCurrentRun(new Place(this.results[0].name));
+    this.runService.addPlaceToCurrentRun(new Place(this.results[0].name,this.results[0].geometry.location.lat(),this.results[0].geometry.location.lng()));
+    console.log(new Place(this.results[0].name,this.results[0].geometry.location.lat(),this.results[0].geometry.location.lng()));
     this.navCtrl.pop();
 
     }

@@ -42,7 +42,7 @@
             </ion-item>
             
           </ion-list>
-          <button ion-button block (click)="addPlaceToRun()">Add place to run</button>  
+          <button ion-button block (click)="addPlaceToRun()" *ngIf="results.length>0">Add place to run</button>  
         </ion-card-content>
 
   </ion-card>

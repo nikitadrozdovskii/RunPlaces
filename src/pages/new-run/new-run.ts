@@ -37,8 +37,7 @@ export class NewRunPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private runService:RunService
     ,private geolocation: Geolocation
     ,private modalCtrl: ModalController) {
-    this.toRun = [{place:new Place("Oxford square"),visited:true},
-    {place:new Place("Faulkner's house"), visited:false}];
+    this.toRun = [];
   }
 
   ionViewWillEnter(){
