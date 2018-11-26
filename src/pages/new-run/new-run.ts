@@ -183,7 +183,7 @@ export class NewRunPage {
 
     //calculate distacne between this and last location, update previous location
     let distance = this.getDistanceFromLatLonInKm(this.previousLoc.lat,this.previousLoc.long,currLat,currLong);
-    this.totalDistance += distance*1.609; //add to total distance in miles
+    this.totalDistance += distance/1.609; //add to total distance in miles
     this.previousLoc.lat = currLat;
     this.previousLoc.long = currLong;
     //calculate time between this and last location, update previous location
