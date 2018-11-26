@@ -27,23 +27,6 @@ export class HomePage {
       if (user){
         this.isAuthenticated = true;
         this.getRunsFromServer();
-        // firebase.auth().currentUser.getIdToken()
-        // .then(token=>{
-        //   this.runService.getSavedRunsFromDB(token).subscribe((response: Response)=>{
-        //     if (response){
-        //       let returnedRuns = [];
-        //       console.log(response);
-        //       (<any>Object).values(response).forEach(value => {
-        //           returnedRuns.push(value);
-        //       });
-        //       (<any>Object).keys(response).forEach((key,i) => {
-        //         returnedRuns[i].id = key;
-        //     });
-        //        console.log(returnedRuns);
-        //        this.runs= returnedRuns;
-        //     }
-        //  });
-        // });
       } else {
         this.isAuthenticated = false;
       }

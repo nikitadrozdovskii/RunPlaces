@@ -63,18 +63,18 @@ export class NewRunPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NewRunPage');
     this.getLocation();
   }
 
   addPlacePage(){
-    console.log('123');
     this.navCtrl.push(AddPlacePage);
   }
 
   startRun(){
+    console.log(this.placeMarkers);
     this.runMode = true;
     this.startTrack();
+    console.log(this.placeMarkers);
   }
 
   //show popup with run data, offer to save it to DB or discard it
@@ -103,13 +103,11 @@ export class NewRunPage {
   }
 
   removeCurrentPlace(index){
-    console.log(this.currentPlaces[index].name)
     this.placeMarkers.forEach(marker=>{
       if (marker.title === this.currentPlaces[index].name){
         marker.setMap(null);
       }
     })
-    console.log(this.placeMarkers);
     this.runService.removeCurrentPlace(index);
     this.loadPlacesFromService();
   }
@@ -165,7 +163,7 @@ export class NewRunPage {
   this.paces=[];
   this.long =0;
   this.lat=0;
-  this.getLocation();
+  // this.getLocation();
 
   // onError Callback receives a PositionError object
   //
@@ -182,7 +180,6 @@ export class NewRunPage {
     let myLatlng = new google.maps.LatLng(currLat, currLong);
     this.marker.setPosition(myLatlng);
     this.map.setCenter(myLatlng);
-    console.log(myLatlng);
 
     //calculate distacne between this and last location, update previous location
     let distance = this.getDistanceFromLatLonInKm(this.previousLoc.lat,this.previousLoc.long,currLat,currLong);
@@ -197,9 +194,9 @@ export class NewRunPage {
     if (this.pace !== Infinity && !isNaN(this.pace)){
       this.sumPace = this.sumPace + this.pace;
       this.paces.push(this.pace);
-      console.log(this.paces);
-      console.log("pace" + this.pace);
-      console.log("sum" + this.sumPace);
+      // console.log(this.paces);
+      // console.log("pace" + this.pace);
+      // console.log("sum" + this.sumPace);
     }
 
     
@@ -209,7 +206,7 @@ export class NewRunPage {
 
 
   getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-    console.log(lat1,lon1, lat2,lon2);
+    // console.log(lat1,lon1, lat2,lon2);
     var R = 6371; // Radius of the earth in km
     var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
     var dLon = this.deg2rad(lon2-lon1); 

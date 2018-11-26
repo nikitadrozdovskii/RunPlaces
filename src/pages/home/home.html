@@ -16,7 +16,7 @@
     <ion-item *ngFor="let run of runs; let i=index">
       <h2>{{run.date}}</h2>
       <h5>Places: </h5><h5 *ngFor="let place of run.places">{{place.name}}</h5>
-      <p>{{run.distance}} mi | {{run.pace}} sec/mi</p>
+      <p>{{run.distance}} mi | {{run.pace}} min/mi</p>
       <ion-icon name="trash" item-end (click)="deleteRun(i)"></ion-icon>
 
     </ion-item>
