@@ -43,5 +43,19 @@ export class RunService {
         let currentUserId = firebase.auth().currentUser.uid;
         return this.http.get('https://runplaces-e4562.firebaseio.com/' + currentUserId + '/saved-runs.json?auth=' + token);
     }
+
+    deleteRun(id){
+
+        return new Promise((resolve, reject) => {
+            let currentUserId = firebase.auth().currentUser.uid;
+            firebase.auth().currentUser.getIdToken()
+            .then(token=>{
+                this.http.delete('https://runplaces-e4562.firebaseio.com/' + currentUserId + `/saved-runs/${id}.json?auth=` + token).subscribe((response)=>{
+                    resolve();
+                });
+            });
+          });
+
+    }
     
 }
