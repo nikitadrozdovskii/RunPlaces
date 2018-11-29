@@ -51,6 +51,7 @@ export class NewRunPage {
         title: place.name
       }));
     });
+    this.startTrack();
   }
 
   loadPlacesFromService(){
@@ -174,7 +175,7 @@ export class NewRunPage {
   // Options: throw an error if no update is received every 30 seconds.
   //
   this.watchID = navigator.geolocation.watchPosition((position) => {
-    //recenter map + marker
+    // recenter map + marker
     let currLat =position.coords.latitude;
     let currLong = position.coords.longitude;
     let myLatlng = new google.maps.LatLng(currLat, currLong);
@@ -182,23 +183,26 @@ export class NewRunPage {
     this.map.setCenter(myLatlng);
 
     //calculate distacne between this and last location, update previous location
-    let distance = this.getDistanceFromLatLonInKm(this.previousLoc.lat,this.previousLoc.long,currLat,currLong);
+    let distance = 0;
+    let timePast = 0;
+    if (this.paces.length!==0) { //if it is first measurment, discard it
+    distance = this.getDistanceFromLatLonInKm(this.previousLoc.lat,this.previousLoc.long,currLat,currLong);
     this.totalDistance += distance/1.609; //add to total distance in miles
     this.previousLoc.lat = currLat;
     this.previousLoc.long = currLong;
     //calculate time between this and last location, update previous location
-    let timePast = position.timestamp - this.previousLoc.time; //since last measurement
+    timePast = position.timestamp - this.previousLoc.time; //since last measurement
     this.previousLoc.time = position.timestamp;
+    } else {
+      this.paces.push(0);
+    }
 
     this.pace =(1/((distance/1.609)/(timePast/60000))); //current pace
     if (this.pace !== Infinity && !isNaN(this.pace)){
       this.sumPace = this.sumPace + this.pace;
       this.paces.push(this.pace);
-      // console.log(this.paces);
-      // console.log("pace" + this.pace);
-      // console.log("sum" + this.sumPace);
     }
-
+    
     
 
 }, onError, { timeout: 30000 });
