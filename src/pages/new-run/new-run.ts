@@ -196,9 +196,12 @@ export class NewRunPage {
     } else {
       this.paces.push(0);
     }
-
+    
     this.pace =(1/((distance/1.609)/(timePast/60000))); //current pace
-    if (this.pace !== Infinity && !isNaN(this.pace)){
+    // this.pace = (distance/1.609)/(timePast/3600/1000);
+    if (this.pace !== Infinity && !isNaN(this.pace) && this.pace !== 0){
+    console.log(this.paces);
+
       this.sumPace = this.sumPace + this.pace;
       this.paces.push(this.pace);
     }

@@ -42,7 +42,7 @@
         <ion-grid *ngIf="runMode == true">
             <ion-row align-items-center justify-content-center>
                 <ion-col class="big_number" text-center>
-                  {{pace.toString().slice(0,4)}}
+                  {{(paces[paces.length-1])?(paces[paces.length-1].toString().slice(0,4)) : 0}}
                 </ion-col>
                 <ion-col class="big_number" text-center>
                   {{totalDistance.toString().slice(0,4)}}
